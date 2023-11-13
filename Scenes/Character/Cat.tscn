@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://dtv1tei045a15"]
+
+[ext_resource type="Script" path="res://Scenes/Character/Cat.gd" id="1_g52st"]
+[ext_resource type="Texture2D" uid="uid://bev1smy2hh7nn" path="res://Assets/Sprites/wolf_idle_animation_0.png" id="2_0dtpj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_700gc"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o2cas"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_0dtpj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Cat" type="CharacterBody2D"]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_g52st")
+metadata/_edit_horizontal_guides_ = []
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_700gc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_o2cas")

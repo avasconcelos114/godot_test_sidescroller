@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://wx1xjn8a2tax"]
+
+[ext_resource type="Script" path="res://root.gd" id="1_wcyuv"]
+[ext_resource type="PackedScene" uid="uid://cntdytjaplbej" path="res://UI/PlayerStatOverlay.tscn" id="2_wmmuq"]
+[ext_resource type="PackedScene" uid="uid://d31pr8nn52ffu" path="res://UI/TitleScreen.tscn" id="3_kj845"]
+
+[node name="root" type="Node2D"]
+script = ExtResource("1_wcyuv")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PlayerStatOverlay" parent="CanvasLayer" instance=ExtResource("2_wmmuq")]
+visible = false
+
+[node name="TitleScreen" parent="CanvasLayer" instance=ExtResource("3_kj845")]
+
+[connection signal="ExitGameSignal" from="CanvasLayer/TitleScreen" to="." method="_on_title_screen_exit_game_signal"]
+[connection signal="StartGameSignal" from="CanvasLayer/TitleScreen" to="." method="_on_title_screen_start_game_signal"]
