@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://bw48aq1a8gbi0"]
+
+[ext_resource type="Script" path="res://Scenes/Misc/ScrollingCamera.gd" id="1_sxkd1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jx384"]
+size = Vector2(50, 500)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hto1j"]
+size = Vector2(440, 27)
+
+[node name="ScrollingCamera" type="Camera2D"]
+zoom = Vector2(1.5, 1.5)
+limit_top = -215
+script = ExtResource("1_sxkd1")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(408, -6)
+rotation = -0.000392846
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_jx384")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(-403, -6)
+disable_mode = 2
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(6.5, 7)
+rotation = -1.5708
+shape = SubResource("RectangleShape2D_hto1j")

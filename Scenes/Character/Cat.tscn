@@ -1,19 +1,57 @@
-[gd_scene load_steps=5 format=3 uid="uid://dtv1tei045a15"]
+[gd_scene load_steps=13 format=3 uid="uid://dtv1tei045a15"]
 
 [ext_resource type="Script" path="res://Scenes/Character/Cat.gd" id="1_g52st"]
-[ext_resource type="Texture2D" uid="uid://bev1smy2hh7nn" path="res://Assets/Sprites/wolf_idle_animation_0.png" id="2_0dtpj"]
+[ext_resource type="Texture2D" uid="uid://cgyapkjoa7uqr" path="res://Assets/Sprites/Cat/Cat_Idle_0.png" id="2_n4m3l"]
+[ext_resource type="Texture2D" uid="uid://dp5vdygxhsgiw" path="res://Assets/Sprites/Cat/Cat_Running_0.png" id="3_x1r58"]
+[ext_resource type="Texture2D" uid="uid://csaua3ppo4brn" path="res://Assets/Sprites/Cat/Cat_Running_1.png" id="4_saujb"]
+[ext_resource type="Texture2D" uid="uid://cdsnhmr8610o7" path="res://Assets/Sprites/Cat/Cat_Running_2.png" id="5_6fmyj"]
+[ext_resource type="Texture2D" uid="uid://c661apgj80rib" path="res://Assets/Sprites/Cat/Cat_Running_3.png" id="6_ch7if"]
+[ext_resource type="Texture2D" uid="uid://cgvgaexastyps" path="res://Assets/Sprites/Cat/Cat_Running_4.png" id="7_d3qvw"]
+[ext_resource type="Texture2D" uid="uid://b6jq33u3leyj7" path="res://Assets/Sprites/Cat/Cat_Running_5.png" id="8_kp0jx"]
+[ext_resource type="Texture2D" uid="uid://uyotq3bqx8ri" path="res://Assets/Sprites/Cat/Cat_Running_6.png" id="9_ugpe3"]
+[ext_resource type="Texture2D" uid="uid://dmr43dmmoa0n3" path="res://Assets/Sprites/Cat/Cat_Running_7.png" id="10_epypd"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_700gc"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oet3p"]
+size = Vector2(26, 19)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o2cas"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_0dtpj")
+"texture": ExtResource("2_n4m3l")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_x1r58")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_saujb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_6fmyj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ch7if")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_d3qvw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_kp0jx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ugpe3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_epypd")
+}],
+"loop": true,
+"name": &"running",
+"speed": 18.0
 }]
 
 [node name="Cat" type="CharacterBody2D"]
@@ -22,8 +60,11 @@ collision_mask = 3
 script = ExtResource("1_g52st")
 metadata/_edit_horizontal_guides_ = []
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_700gc")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Player"]]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_oet3p")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_o2cas")
+animation = &"running"
+frame_progress = 0.461957

@@ -1,0 +1,85 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1c334hchqhwk"]
+
+[ext_resource type="Script" path="res://UI/LevelClearedScreen.gd" id="1_vdej5"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_pnt41"]
+font_size = 28
+
+[node name="LevelClearedScreen" type="FlowContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vdej5")
+
+[node name="VFlowContainer" type="VFlowContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="HFlowContainer" type="HFlowContainer" parent="."]
+layout_mode = 2
+theme_override_constants/v_separation = 40
+alignment = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HFlowContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 200
+
+[node name="Label" type="Label" parent="HFlowContainer"]
+layout_mode = 2
+text = "Level Cleared!"
+label_settings = SubResource("LabelSettings_pnt41")
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HFlowContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HFlowContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="HFlowContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Fishes Collected"
+
+[node name="MarginContainer" type="MarginContainer" parent="HFlowContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+
+[node name="FishCollected" type="Label" parent="HFlowContainer/VBoxContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HFlowContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HFlowContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="HFlowContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+text = "Milk Collected"
+
+[node name="MarginContainer" type="MarginContainer" parent="HFlowContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+
+[node name="MilkCollected" type="Label" parent="HFlowContainer/VBoxContainer2/HBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="HFlowContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="HFlowContainer/VBoxContainer3"]
+layout_mode = 2
+text = "Proceed to next level"
+
+[node name="VFlowContainer3" type="VFlowContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="button_down" from="HFlowContainer/VBoxContainer3/Button" to="." method="_on_button_button_down"]

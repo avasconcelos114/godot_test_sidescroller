@@ -1,17 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://d31pr8nn52ffu"]
+[gd_scene load_steps=3 format=3 uid="uid://tt3hede5bcjg"]
 
-[ext_resource type="Script" path="res://UI/TitleScreen.gd" id="1_t2th3"]
+[ext_resource type="Script" path="res://UI/GameOverScreen.gd" id="1_125sg"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_pnt41"]
 font_size = 28
 
-[node name="TitleScreen" type="FlowContainer"]
+[node name="GameOverScreen" type="FlowContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_t2th3")
+script = ExtResource("1_125sg")
 
 [node name="VFlowContainer" type="VFlowContainer" parent="."]
 layout_mode = 2
@@ -27,23 +27,24 @@ alignment = 1
 layout_mode = 2
 theme_override_constants/margin_top = 200
 
-[node name="GameLabel" type="Label" parent="HFlowContainer"]
+[node name="GameOverLabel" type="Label" parent="HFlowContainer"]
 layout_mode = 2
-text = "Meowttack of the Cones!"
+text = "You ran out of lives!"
 label_settings = SubResource("LabelSettings_pnt41")
 horizontal_alignment = 1
 
-[node name="StartGameButton" type="Button" parent="HFlowContainer"]
+[node name="Restart" type="Button" parent="HFlowContainer"]
 layout_mode = 2
-text = "Start Game"
+text = "Reload from last checkpoint"
 
-[node name="Exit Game" type="Button" parent="HFlowContainer"]
+[node name="RageQuit" type="Button" parent="HFlowContainer"]
 layout_mode = 2
-text = "Exit Game"
+text = "Rage Quit
+"
 
 [node name="VFlowContainer3" type="VFlowContainer" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[connection signal="button_down" from="HFlowContainer/StartGameButton" to="." method="_on_start_game_button_button_down"]
-[connection signal="button_down" from="HFlowContainer/Exit Game" to="." method="_on_exit_game_button_down"]
+[connection signal="button_down" from="HFlowContainer/Restart" to="." method="_on_restart_button_down"]
+[connection signal="button_down" from="HFlowContainer/RageQuit" to="." method="_on_rage_quit_button_down"]

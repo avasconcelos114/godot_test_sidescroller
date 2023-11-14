@@ -1,23 +1,31 @@
 extends CharacterBody2D
 class_name Cat
 
-var lives = 3
+var lives = 9
 var max_health = 3
 var current_health = 3
 
 const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
+const JUMP_VELOCITY = -300.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-func _ready():
-	Global.set_camera($Camera2D)
+func received_damage(dmg: float):
+	current_health -= dmg
 
-func _physics_process(delta):
+	if current_health <= 0:
+		lives -= 1
+		Global.PlayerDied.emit()
+
+func _physics_process(_delta):	
+	if Global.is_paused:
+		$AnimatedSprite2D.stop()
+		return
+
 	# Add the gravity.
 	if not is_on_floor():
-		velocity.y += gravity * delta
+		velocity.y += gravity * Global.time
 
 	# Handle Jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
@@ -38,10 +46,10 @@ func _physics_process(delta):
 		is_moving = false
 	
 	# Play appropriate animations
-	#if !is_moving and is_on_floor():
-		#$AnimatedSprite2D.play("idle")
-	#elif is_moving and is_on_floor():
-		#$AnimatedSprite2D.play("running")
+	if !is_moving and is_on_floor():
+		$AnimatedSprite2D.play("default")
+	elif is_moving and is_on_floor():
+		$AnimatedSprite2D.play("running")
 	#elif !is_on_floor():
 		#$AnimatedSprite2D.play("jumping")
 	

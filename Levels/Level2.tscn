@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cuympsuq6sjqt"]
+[gd_scene load_steps=9 format=3 uid="uid://cuympsuq6sjqt"]
 
 [ext_resource type="Texture2D" uid="uid://dswkcborckxwh" path="res://Assets/Tilesets/Tileset.png" id="2_5eto7"]
 [ext_resource type="PackedScene" uid="uid://fwi1w5at86o2" path="res://Scenes/Misc/Background.tscn" id="3_7twur"]
+[ext_resource type="Script" path="res://Scripts/Checkpoint.gd" id="3_iherf"]
+[ext_resource type="PackedScene" uid="uid://bw48aq1a8gbi0" path="res://Scenes/Misc/ScrollingCamera.tscn" id="4_kndf2"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_de2je"]
 
@@ -862,6 +864,8 @@ physics_layer_0/physics_material = SubResource("PhysicsMaterial_de2je")
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_rally")
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_4ax0b"]
+
 [node name="Level2" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -870,7 +874,17 @@ tile_set = SubResource("TileSet_1wbsv")
 format = 2
 layer_0/tile_data = PackedInt32Array(65534, 0, 0, 65535, 65536, 0, 0, 131072, 0, 1, 196608, 0, 2, 262144, 0, 3, 327680, 0, 4, 0, 0, 5, 65536, 0, 6, 131072, 0, 7, 196608, 0, 8, 262144, 0, 9, 327680, 0, 10, 0, 0, 11, 65536, 0, 12, 131072, 0, 13, 196608, 0, 65548, 65536, 1, 65549, 131072, 1, 65544, 65536, 1, 65545, 131072, 1, 65546, 196608, 1, 65547, 262144, 1, 65540, 65536, 1, 65541, 131072, 1, 65542, 196608, 1, 65543, 262144, 1, 65536, 65536, 1, 65537, 131072, 1, 65538, 196608, 1, 65539, 262144, 1, 131070, 0, 1, 131071, 131072, 1, 196606, 0, 2, 262142, 0, 3, 327678, 0, 4)
 
-[node name="PlayerSpawn" type="Marker2D" parent="."]
-position = Vector2(0, 8)
-
 [node name="ParallaxBackground" parent="." instance=ExtResource("3_7twur")]
+
+[node name="PlayerSpawn" type="Marker2D" parent="."]
+position = Vector2(47, 1)
+script = ExtResource("3_iherf")
+
+[node name="ScrollingCamera" parent="." node_paths=PackedStringArray("start_position_marker") instance=ExtResource("4_kndf2")]
+start_position_marker = NodePath("../PlayerSpawn")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(637, 198)
+shape = SubResource("WorldBoundaryShape2D_4ax0b")

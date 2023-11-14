@@ -1,5 +1,31 @@
-[gd_scene format=3 uid="uid://cntdytjaplbej"]
+[gd_scene load_steps=3 format=3 uid="uid://cntdytjaplbej"]
+
+[ext_resource type="Script" path="res://UI/PlayerStatOverlay.gd" id="1_e6bmv"]
+[ext_resource type="Texture2D" uid="uid://cgyapkjoa7uqr" path="res://Assets/Sprites/Cat/Cat_Idle_0.png" id="1_nh3o5"]
 
 [node name="PlayerStatOverlay" type="MarginContainer"]
 offset_right = 40.0
 offset_bottom = 40.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+script = ExtResource("1_e6bmv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="LifeWrapper" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/LifeWrapper"]
+layout_mode = 2
+texture = ExtResource("1_nh3o5")
+
+[node name="RemainingLivesMarker" type="Label" parent="VBoxContainer/LifeWrapper"]
+layout_mode = 2
+text = "x 3"
+
+[node name="FishCollectedWraper" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="MilkCollectedWrapper" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2

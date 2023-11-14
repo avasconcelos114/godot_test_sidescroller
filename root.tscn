@@ -1,18 +1,33 @@
-[gd_scene load_steps=4 format=3 uid="uid://wx1xjn8a2tax"]
+[gd_scene load_steps=7 format=3 uid="uid://wx1xjn8a2tax"]
 
 [ext_resource type="Script" path="res://root.gd" id="1_wcyuv"]
 [ext_resource type="PackedScene" uid="uid://cntdytjaplbej" path="res://UI/PlayerStatOverlay.tscn" id="2_wmmuq"]
 [ext_resource type="PackedScene" uid="uid://d31pr8nn52ffu" path="res://UI/TitleScreen.tscn" id="3_kj845"]
+[ext_resource type="PackedScene" uid="uid://tt3hede5bcjg" path="res://UI/GameOverScreen.tscn" id="4_7bkm8"]
+[ext_resource type="PackedScene" uid="uid://d3km3b3cx1b34" path="res://UI/PausedScreen.tscn" id="5_3171r"]
+[ext_resource type="PackedScene" uid="uid://b1c334hchqhwk" path="res://UI/LevelClearedScreen.tscn" id="6_aoj48"]
 
 [node name="root" type="Node2D"]
 script = ExtResource("1_wcyuv")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="TitleScreen" parent="CanvasLayer" instance=ExtResource("3_kj845")]
+
+[node name="GameOverScreen" parent="CanvasLayer" instance=ExtResource("4_7bkm8")]
+visible = false
+
 [node name="PlayerStatOverlay" parent="CanvasLayer" instance=ExtResource("2_wmmuq")]
 visible = false
 
-[node name="TitleScreen" parent="CanvasLayer" instance=ExtResource("3_kj845")]
+[node name="PausedScreen" parent="CanvasLayer" instance=ExtResource("5_3171r")]
+visible = false
+
+[node name="LevelClearedScreen" parent="CanvasLayer" instance=ExtResource("6_aoj48")]
+visible = false
 
 [connection signal="ExitGameSignal" from="CanvasLayer/TitleScreen" to="." method="_on_title_screen_exit_game_signal"]
 [connection signal="StartGameSignal" from="CanvasLayer/TitleScreen" to="." method="_on_title_screen_start_game_signal"]
+[connection signal="ExitGameSignal" from="CanvasLayer/GameOverScreen" to="." method="_on_game_over_screen_exit_game_signal"]
+[connection signal="ReloadSignal" from="CanvasLayer/GameOverScreen" to="." method="_on_game_over_screen_reload_signal"]
+[connection signal="LoadNextLevelSignal" from="CanvasLayer/LevelClearedScreen" to="." method="_on_level_cleared_screen_load_next_level_signal"]
