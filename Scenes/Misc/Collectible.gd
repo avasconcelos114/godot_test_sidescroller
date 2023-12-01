@@ -17,8 +17,8 @@ func _physics_process(_delta):
 	time += Global.time * frequency
 	position.y = default_position.y + sin(time)
 
-func _on_body_entered(_body):
-	if collectible_type != null :
+func _on_body_entered(body):
+	if body is Cat and collectible_type != null:
 		Global.add_score(collectible_type)
 		queue_free()
 

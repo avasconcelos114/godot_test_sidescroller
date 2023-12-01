@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://suoky3b32wlw"]
+
+[ext_resource type="Script" path="res://Scenes/Enemies/Cone.gd" id="1_eh4jg"]
+[ext_resource type="Texture2D" uid="uid://dahi12rayj4fr" path="res://Assets/Sprites/Enemies/Enemy_Death_0.png" id="2_tg8b7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ec0yg"]
+radius = 61.0082
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8v75f"]
+
+[node name="Cone" type="CharacterBody2D" node_paths=PackedStringArray("navigation_agent")]
+script = ExtResource("1_eh4jg")
+navigation_agent = NodePath("NavigationAgent2D")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_ec0yg")
+debug_color = Color(0.980392, 0.0431373, 0.356863, 0.419608)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_tg8b7")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8v75f")
+disabled = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

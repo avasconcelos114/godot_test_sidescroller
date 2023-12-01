@@ -4,6 +4,7 @@ var level_1 = preload("res://Levels/Level1.tscn")
 var level_2 = preload("res://Levels/Level2.tscn")
 var level_3 = preload("res://Levels/Level3.tscn")
 var player_scene = preload("res://Scenes/Character/Cat.tscn")
+var cone_scene = preload("res://Scenes/Enemies/Cone.tscn")
 
 var loaded_level: Node2D
 
@@ -15,11 +16,18 @@ func _ready():
 	Global.GameOverSignal.connect(_show_game_over_screen)
 	# Show level cleared screen
 	Global.LevelClearedSignal.connect(_show_level_cleared_screen)
+	# Boss listeners
+	Global.SpawnBossSignal.connect(_spawn_boss)
+	Global.UpdateBossSpeedSignal.connect(_update_boss_speed)
+	Global.PlayerDied.connect(_despawn_boss)
 
 func _physics_process(_delta):
 	$CanvasLayer/PausedScreen.visible = Global.is_paused
 
 func _start_game():
+	if loaded_level:
+		loaded_level.queue_free()
+
 	var level = get_current_level()
 	loaded_level = level
 	add_child(level)
@@ -82,3 +90,22 @@ func _on_level_cleared_screen_load_next_level_signal():
 	$CanvasLayer/LevelClearedScreen.visible = false
 	_start_game()
 	Global.set_pause_game(false)
+
+func _spawn_boss(speed: float):
+	if Global.boss:
+		return
+
+	var cone = cone_scene.instantiate()
+	cone.movement_speed = speed
+	var spawn_point = get_tree().get_first_node_in_group("BossSpawnPoint") as Marker2D
+	cone.position = spawn_point.position
+	add_child(cone)
+	Global.set_boss(cone)
+
+func _despawn_boss():
+	if Global.boss:
+		Global.boss.queue_free()
+		Global.boss = null
+
+func _update_boss_speed(speed):
+	Global.boss.movement_speed = speed

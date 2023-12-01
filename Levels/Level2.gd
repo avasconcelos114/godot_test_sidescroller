@@ -5,4 +5,5 @@ func _ready():
 	Global.set_last_checkpoint($PlayerSpawn)
 
 func _on_area_2d_body_entered(body):
-	Global.player.kill_player()
+	if body is Cat:
+		Global.player.kill_player()

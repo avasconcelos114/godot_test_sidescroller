@@ -1,0 +1,138 @@
+[gd_scene load_steps=23 format=3 uid="uid://3jbkek63xpe5"]
+
+[ext_resource type="Texture2D" uid="uid://b7ims4hbtqg4n" path="res://Assets/Sprites/Enemies/Rat/Rat_Idle_0.png" id="1_6hrrq"]
+[ext_resource type="Script" path="res://Scripts/Enemy.gd" id="1_nxiu4"]
+[ext_resource type="Texture2D" uid="uid://dahi12rayj4fr" path="res://Assets/Sprites/Enemies/Enemy_Death_0.png" id="2_m14ky"]
+[ext_resource type="Texture2D" uid="uid://d24br3o1mhwad" path="res://Assets/Sprites/Enemies/Rat/Rat_Idle_1.png" id="2_qlnf4"]
+[ext_resource type="Texture2D" uid="uid://bk1467byyw8ea" path="res://Assets/Sprites/Enemies/Enemy_Death_1.png" id="3_gbeo4"]
+[ext_resource type="Texture2D" uid="uid://c5nkchdt4pby" path="res://Assets/Sprites/Enemies/Rat/Rat_Idle_2.png" id="3_mb4dk"]
+[ext_resource type="Texture2D" uid="uid://c2sgv2easxhbb" path="res://Assets/Sprites/Enemies/Rat/Rat_Idle_3.png" id="4_74qfm"]
+[ext_resource type="Texture2D" uid="uid://d17chtjmkjekv" path="res://Assets/Sprites/Enemies/Enemy_Death_2.png" id="4_atdbh"]
+[ext_resource type="Texture2D" uid="uid://co8qfh0wvfkum" path="res://Assets/Sprites/Enemies/Enemy_Death_3.png" id="5_22bt5"]
+[ext_resource type="Texture2D" uid="uid://b3yfeq8u4moxp" path="res://Assets/Sprites/Enemies/Enemy_Death_4.png" id="6_dbc3m"]
+[ext_resource type="Texture2D" uid="uid://dknutbawhf1by" path="res://Assets/Sprites/Enemies/Enemy_Death_5.png" id="7_cs6th"]
+[ext_resource type="Texture2D" uid="uid://tdx3cyn5eeis" path="res://Assets/Sprites/Enemies/Enemy_Death_6.png" id="8_dtjku"]
+[ext_resource type="Texture2D" uid="uid://tkp3gj2liefw" path="res://Assets/Sprites/Enemies/Rat/Rat_Running_0.png" id="13_tbcsf"]
+[ext_resource type="Texture2D" uid="uid://cji4h8t61mys0" path="res://Assets/Sprites/Enemies/Rat/Rat_Running_1.png" id="14_colcr"]
+[ext_resource type="Texture2D" uid="uid://ck1v06ywms51m" path="res://Assets/Sprites/Enemies/Rat/Rat_Running_2.png" id="15_3baqe"]
+[ext_resource type="Texture2D" uid="uid://li0q7gphbilb" path="res://Assets/Sprites/Enemies/Rat/Rat_Running_3.png" id="16_7qtrb"]
+[ext_resource type="Texture2D" uid="uid://vfard2p837hw" path="res://Assets/Sprites/Enemies/Rat/Rat_Running_4.png" id="17_rje5h"]
+[ext_resource type="Texture2D" uid="uid://c6frt7ggosfy0" path="res://Assets/Sprites/Enemies/Rat/Rat_Running_5.png" id="18_u2lha"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jv60k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_m14ky")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_gbeo4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_atdbh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_22bt5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_dbc3m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_cs6th")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_dtjku")
+}],
+"loop": false,
+"name": &"death",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_6hrrq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_qlnf4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_mb4dk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_74qfm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_tbcsf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_colcr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_3baqe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_7qtrb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_rje5h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_u2lha")
+}],
+"loop": true,
+"name": &"running",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n7adq"]
+size = Vector2(24, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d6wlk"]
+size = Vector2(24, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vusel"]
+size = Vector2(2, 12)
+
+[node name="Rat" type="CharacterBody2D"]
+position = Vector2(0, -4)
+script = ExtResource("1_nxiu4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -6)
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_jv60k")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -2)
+shape = SubResource("RectangleShape2D_n7adq")
+
+[node name="ReceiveDamageZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ReceiveDamageZone"]
+position = Vector2(1, -9)
+shape = SubResource("RectangleShape2D_d6wlk")
+debug_color = Color(0.901961, 0, 0.756863, 0.419608)
+
+[node name="DealDamageZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DealDamageZone"]
+position = Vector2(-12, -2)
+shape = SubResource("RectangleShape2D_vusel")
+debug_color = Color(0.933333, 0, 0.180392, 0.419608)
+
+[node name="DealDamageZone2" type="Area2D" parent="."]
+position = Vector2(26, 0)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="DealDamageZone2"]
+position = Vector2(-12, -2)
+shape = SubResource("RectangleShape2D_vusel")
+debug_color = Color(0.933333, 0, 0.180392, 0.419608)
+
+[connection signal="body_entered" from="ReceiveDamageZone" to="." method="_on_receive_damage_zone_body_entered"]
+[connection signal="body_entered" from="DealDamageZone" to="." method="_on_deal_damage_zone_body_entered"]
+[connection signal="body_entered" from="DealDamageZone2" to="." method="_on_deal_damage_zone_2_body_entered"]

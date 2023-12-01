@@ -66,5 +66,3 @@ shape = SubResource("RectangleShape2D_oet3p")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_o2cas")
-animation = &"running"
-frame_progress = 0.461957

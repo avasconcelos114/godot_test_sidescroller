@@ -1,8 +1,14 @@
 extends Node
 
-# Signals
+# Player Signals
 signal PlayerDied
 signal PlayerReceivedDamage
+
+# Enemy Signals
+signal SpawnBossSignal
+signal UpdateBossSpeedSignal
+
+# Game Signals
 signal GameOverSignal
 signal RestartFromCheckpointSignal
 signal LevelClearedSignal
@@ -21,6 +27,7 @@ enum Collectibles {
 }
 
 var time = 0
+var camera_speed = 50
 var is_paused = false
 
 var scores : Dictionary = {
@@ -45,6 +52,7 @@ var last_checkpoint: Checkpoint
 var current_level: Levels
 var camera: Camera2D
 var player: Cat
+var boss: Cone
 
 # Methods
 func _ready():
@@ -62,6 +70,7 @@ func _physics_process(delta):
 
 func respawn_player():
 	if player.lives:
+		camera_speed = 50
 		player.position = last_checkpoint.position
 		camera.position = last_checkpoint.position
 	else:
@@ -75,6 +84,9 @@ func set_last_checkpoint(new_checkpoint: Checkpoint):
 
 func set_player(new_player: Cat):
 	player = new_player
+
+func set_boss(new_boss: Cone):
+	boss = new_boss
 
 func set_camera(new_camera: Camera2D):
 	camera = new_camera
